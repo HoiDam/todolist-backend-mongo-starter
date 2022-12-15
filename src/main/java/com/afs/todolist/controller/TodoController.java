@@ -1,5 +1,6 @@
 package com.afs.todolist.controller;
 
+import com.afs.todolist.controller.dto.TodoCreateRequest;
 import com.afs.todolist.controller.mapper.TodoMapper;
 import com.afs.todolist.entity.Todo;
 import com.afs.todolist.service.TodoService;
@@ -31,5 +32,18 @@ public class TodoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteTodo(@PathVariable String id){
         todoService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    @CrossOrigin
+    Todo updateTodo(@PathVariable String id, @RequestBody Todo todo){
+        return todoService.updateById(id,todo);
+    }
+
+    @PostMapping
+    @CrossOrigin
+    @ResponseStatus(HttpStatus.CREATED)
+    Todo addTodo(@RequestBody TodoCreateRequest todoCreateRequest){
+        return todoService.addTodo(todoMapper.toEntity(todoCreateRequest));
     }
 }
