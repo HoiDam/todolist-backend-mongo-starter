@@ -36,8 +36,8 @@ public class TodoController {
 
     @PutMapping("/{id}")
     @CrossOrigin
-    Todo updateTodo(@PathVariable String id, @RequestBody Todo todo){
-        return todoService.updateById(id,todo);
+    Todo updateTodo(@PathVariable String id, @RequestBody TodoCreateRequest todoUpdateRequest){
+        return todoService.updateById(id,todoMapper.toEntity(todoUpdateRequest));
     }
 
     @PostMapping

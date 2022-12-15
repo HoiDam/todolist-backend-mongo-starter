@@ -4,6 +4,8 @@ public class TodoUpdateRequest {
     private Boolean done;
     private String text;
 
+    private String color;
+
     public TodoUpdateRequest() {
     }
 
@@ -21,5 +23,13 @@ public class TodoUpdateRequest {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
