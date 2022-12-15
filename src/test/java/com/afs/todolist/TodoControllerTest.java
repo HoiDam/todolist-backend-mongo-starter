@@ -2,11 +2,13 @@ package com.afs.todolist;
 
 import com.afs.todolist.entity.Todo;
 import com.afs.todolist.repository.TodoRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -51,5 +53,17 @@ public class TodoControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
         assertEquals(todoRepository.findAll().size(), 0);
     }
-    
+    @Test
+    void should_update_item_by_id_when_perform_update_given_todo_id() throws Exception {
+
+        Todo todo = todoRepository.save(new Todo("Test",false,"#ffffff"));
+        Todo newTodo = new Todo("New test",false,"#ffffff") ;
+        //when & then
+        client.perform(MockMvcRequestBuilders.put("/todos/"+todo.getId())
+                        .content(new ObjectMapper().writeValueAsString(newTodo))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.text").value("New test"));
+    }
+
 }
