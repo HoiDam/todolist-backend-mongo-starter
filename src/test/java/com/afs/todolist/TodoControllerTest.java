@@ -65,5 +65,19 @@ public class TodoControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.text").value("New test"));
     }
+    @Test
+    void should_create_todo_when_perform_post_given_todo() throws Exception {
+
+        Todo todo =  new Todo("Test",false,"#ffffff");
+        //when & then
+        client.perform(MockMvcRequestBuilders.post("/todos")
+                .content(new ObjectMapper().writeValueAsString(todo))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.color").value("#ffffff"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.text").value("Test"));
+        Todo returnTodo = todoRepository.findAll().get(0);
+        assertEquals(returnTodo.getText(), "Test");
+    }
 
 }
