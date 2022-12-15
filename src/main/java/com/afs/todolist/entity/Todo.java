@@ -13,7 +13,13 @@ public class Todo {
 
     private String color;
 
-    public Todo() {
+    public Todo(){
+
+    }
+    public Todo(String text, Boolean done, String color) {
+        this.text = text;
+        this.done = done;
+        this.color = color;
     }
 
     public String getId() {
