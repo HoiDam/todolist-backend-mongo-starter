@@ -11,6 +11,8 @@ public class Todo {
     private String text;
     private Boolean done;
 
+    private String color;
+
     public Todo() {
     }
 
@@ -36,5 +38,13 @@ public class Todo {
 
     public void setDone(Boolean done) {
         this.done = done;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
