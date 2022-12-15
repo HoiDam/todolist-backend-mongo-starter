@@ -3,7 +3,7 @@ package com.afs.todolist.controller.dto;
 public class TodoCreateRequest {
     private String text;
     private String color;
-    private String done;
+    private Boolean done;
 
     public TodoCreateRequest() {
     }
@@ -24,11 +24,11 @@ public class TodoCreateRequest {
         this.color = color;
     }
 
-    public String getDone() {
+    public Boolean getDone() {
         return done;
     }
 
-    public void setDone(String done) {
+    public void setDone(Boolean done) {
         this.done = done;
     }
 }
